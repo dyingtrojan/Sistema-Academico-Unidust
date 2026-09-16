@@ -1,48 +1,9 @@
 const API_URL = "https://localhost:7173/api/Atividades"
 
-async function procurarTurmas() {
-    const result = await fetch(`https://localhost:7173/api/Turmas`)
-    const turmas = await result.json()
-
-    const turma_select = document.getElementById("turma")
-    turma_select.innerHTML = ``
-    for (var turma of turmas) {
-        turma_select.innerHTML += `
-        <option value="${turma.id}">ID: ${turma.id} | ${turma.nomeTurma}</option>
-        `
-    }
-}
-
-async function procurarDisciplinas() {
-    const result = await fetch(`https://localhost:7173/api/Disciplinas`)
-    const disciplinas = await result.json()
-
-    const disciplinaSelect = document.getElementById("disciplina")
-
-    for (var disciplina of disciplinas) {
-        disciplinaSelect.innerHTML += `
-        <option value="${disciplina.id}">ID: ${disciplina.id} | ${disciplina.nomeDisciplina}</option>
-        `
-    }
-}
-
-async function procurarProfessor() {
-    const result = await fetch(`https://localhost:7173/api/Professores`)
-    const professores = await result.json()
-
-    const professorSelect = document.getElementById("professor")
-
-    for (var professor of professores) {
-        professorSelect.innerHTML += `
-        <option value="${professor.id}">ID: ${professor.id} | ${professor.nome}</option>
-        `
-    }
-}
-
 async function procurarAtividades() {
     const result = await fetch(`${API_URL}`)
-    const atividades = await result.json()
-    return atividades
+    const atividades  = await result.json()
+    return atividades 
 }
 
 async function adicionarAtividade() {
@@ -78,14 +39,15 @@ async function alterarTabela() {
 
     tabela.innerHTML = ``
 
-    for (const atividade of atividades) {
+    for (const atividade of atividades){
         tabela.innerHTML += `
         <tr>
             <td>${atividade.id}</td>
             <td>${atividade.nome}</td>
             <td>${atividade.descricao}</td>
-            <td>${atividade.turma}</td>
-            <td>${atividade.professor}</td>
+            <td>${atividade.turma.nomeTurma}</td>
+            <td>${atividade.professor.nome}</td>
+            <td>${atividade.disciplina.nomeDisciplina}</td>
             <th><a>Editar</a></th>
             <th><a>Detalhes</a></th>
             <th><button class="delete" onclick=deletarAtividade(${atividade.id})>Delete</button></th>
@@ -94,12 +56,12 @@ async function alterarTabela() {
     }
 }
 
-async function deletarAtividade(id) {
+async function deletarAtividade(id){
     const confirmacao = confirm("Tem certeza que quer apagar a atividade?")
-    if (!confirmacao) {
+    if (!confirmacao){
         return
     }
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`,{
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json'

@@ -90,17 +90,20 @@ namespace Atividade_API.Controllers
           {
               return Problem("Entity set 'AppDbContext.Turma'  is null.");
           }
-          if (turma.Disciplinas != null && turma.Disciplinas.Any()){
-                var disciplinasIds = turma.Disciplinas.Select(d => d.Id).ToList();
+          if (turma.Disciplinas != null && turma.Disciplinas.Any())
+    {
+        // Extrai apenas os IDs enviados pelo Front-end
+        var disciplinasIds = turma.Disciplinas.Select(d => d.Id).ToList();
 
-                var disciplinasDoBanco = await _context.Disciplina
-                .Where(d => disciplinasIds.Contains(d.Id))
-                .ToListAsync();
+        // Busca as disciplinas reais cadastradas no Banco de Dados
+        var disciplinasDoBanco = await _context.Disciplina
+            .Where(d => disciplinasIds.Contains(d.Id))
+            .ToListAsync();
 
-                turma.Disciplinas = disciplinasDoBanco;
-            }
-            _context.Turma.Add(turma);
-            await _context.SaveChangesAsync();
+        // Substitui a lista recebida pelas entidades rastreadas pelo Entity Framework
+        turma.Disciplinas = disciplinasDoBanco;
+    }
+
             return CreatedAtAction("GetTurma", new { id = turma.Id }, turma);
         }
 

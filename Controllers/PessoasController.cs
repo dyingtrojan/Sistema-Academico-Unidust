@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Atividade_API.Data;
 using Atividade_API.Models;
+using Atividade_API.Models.Usuarios;
 
 namespace Atividade_API.Controllers
 {
@@ -119,6 +120,31 @@ namespace Atividade_API.Controllers
         private bool PessoaExists(int id)
         {
             return (_context.Pessoa?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto ldto)
+        {
+            var pessoa = await _context.Pessoa.FirstOrDefaultAsync(p => p.email == ldto.email);
+
+            if (pessoa == null || pessoa.hashSenha != ldto.senha)
+            {
+                return Unauthorized("Email ou senha errado.");
+            }
+            string tipoUsuario = pessoa switch{
+            Administrador => "Administrador",
+            Professor => "Professor",
+            Aluno => "Aluno",
+            };
+            return Ok(new { 
+                mensagem = "Login realizado com sucesso!",
+                role = tipoUsuario,
+                usuario = new 
+                { 
+                    pessoa.Id, 
+                    pessoa.nome, 
+                    pessoa.email 
+                }
+            });
         }
     }
 }

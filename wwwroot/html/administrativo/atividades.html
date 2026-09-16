@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +7,7 @@
     <link rel="stylesheet" href="../../css/site.css">
     <script src="../../js/api/atividade.js" defer></script>
 </head>
-
-<body onload="alterarTabela(); procurarTurmas(); procurarDisciplinas(); procurarProfessor()">
+<body onload="alterarTabela()">
     <header>
         <button onclick="javascript:history.back()">← Voltar</button>
     </header>
@@ -27,17 +25,19 @@
             <label for="turma">Turma</label>
             <select name="turma" id="turma">
                 <option value="null" disabled selected>Selecione a turma</option>
+                <option value=3>Nenhuma turma.</option>
             </select>
             <br>
             <label for="professor">Professor</label>
             <select name="professor" id="professor">
                 <option value="null" disabled selected>Selecione o professor</option>
-
+                <option value=1010>Nenhum professor.</option>
             </select>
             <br>
-            <label for="disciplina">Disciplina</label>
+            <label for="disciplina">disciplina</label>
             <select name="disciplina" id="disciplina">
-                <option value="null" disabled selected>Selecione a disciplina</option>
+                <option value="null" disabled selected>Selecione o disciplina</option>
+                <option value=2>Nenhum disciplina.</option>
             </select>
             <br>
             <button class="cadastrar" onclick="adicionarAtividade()">Adicionar</button>
@@ -58,11 +58,10 @@
                     </tr>
                 </thead>
                 <tbody id="tabela-atividades">
-
+    
                 </tbody>
             </table>
         </div>
     </main>
 </body>
-
 </html>

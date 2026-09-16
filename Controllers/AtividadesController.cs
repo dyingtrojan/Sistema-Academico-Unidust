@@ -29,7 +29,9 @@ namespace Atividade_API.Controllers
           {
               return NotFound();
           }
-            return await _context.Atividade.ToListAsync();
+            return await _context.Atividade.Include(a => a.professor).Include(a => a.professor)
+        .Include(a => a.turma)
+        .Include(a => a.disciplina).ToListAsync();
         }
 
         // GET: api/Atividades/5
@@ -40,7 +42,9 @@ namespace Atividade_API.Controllers
           {
               return NotFound();
           }
-            var atividade = await _context.Atividade.FindAsync(id);
+            var atividade = await _context.Atividade.Include(a => a.professor).Include(a => a.professor)
+        .Include(a => a.turma)
+        .Include(a => a.disciplina).FirstOrDefaultAsync(a => a.Id == id);
 
             if (atividade == null)
             {
@@ -90,6 +94,15 @@ namespace Atividade_API.Controllers
           {
               return Problem("Entity set 'AppDbContext.Atividade'  is null.");
           }
+            if (atividade.professor != null){
+                
+
+                var professorDoBanco = await _context.Professor.FirstOrDefaultAsync(
+                    p => p.Id == atividade.ProfessorID
+                );
+
+                atividade.professor = professorDoBanco;
+            }
             _context.Atividade.Add(atividade);
             try
             {

@@ -2,8 +2,8 @@ const API_URL = "https://localhost:7173/api/Turmas"
 
 async function procurarTurmas() {
     const result = await fetch(`${API_URL}`)
-    const turmas = await result.json()
-    return turmas
+    const turmas  = await result.json()
+    return turmas 
 }
 
 async function adicionarTurma() {
@@ -11,17 +11,17 @@ async function adicionarTurma() {
     const anoLetivo = document.getElementById("anoLetivo").value
     const turno = document.getElementById("turno").value
     const disciplina = document.getElementById("disciplina")
-
+    
     const disciplinasObjetos = Array.from(disciplina.selectedOptions).map(option => ({
         id: parseInt(option.value)
     }));
-
+    
     try {
         const payload = {
             nomeTurma: nomeTurma,
             anoLetivo: parseInt(anoLetivo),
             turno: turno,
-            disciplinas: disciplinasObjetos
+            disciplinas: valores
         }
         const response = await fetch(API_URL, {
             method: "POST",
@@ -30,11 +30,10 @@ async function adicionarTurma() {
             },
             body: JSON.stringify(payload)
         })
-        await alterarTabela()
     } catch (error) {
         alert("Um Erro ocorreu. Tente novamente mais tarde")
     }
-
+    alterarTabela()
 }
 
 async function alterarTabela() {
@@ -43,7 +42,7 @@ async function alterarTabela() {
 
     tabela.innerHTML = ``
 
-    for (const turma of turmas) {
+    for (const turma of turmas){
         tabela.innerHTML += `
         <tr>
             <td>${turma.id}</td>
@@ -58,12 +57,12 @@ async function alterarTabela() {
     }
 }
 
-async function deletarTurma(id) {
+async function deletarTurma(id){
     const confirmacao = confirm("Tem certeza que quer apagar a turma?")
-    if (!confirmacao) {
+    if (!confirmacao){
         return
     }
-    const response = await fetch(`${API_URL}/${id}`, {
+    const response = await fetch(`${API_URL}/${id}`,{
         method: "DELETE",
         headers: {
             'Content-Type': 'application/json'
@@ -80,7 +79,7 @@ async function procurarDisciplinas() {
     const disciplinaOption = document.getElementById("disciplina")
     disciplinaOption.innerHTML = ``
 
-    for (const disciplina of disciplinas) {
+    for (const disciplina of disciplinas){
         disciplinaOption.innerHTML += `
             <option value="${disciplina.id}">${disciplina.nomeDisciplina} | ${disciplina.cargaHoraria} horas</option>
         `

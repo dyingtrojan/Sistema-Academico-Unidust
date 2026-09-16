@@ -126,3 +126,29 @@ function alterarDiv(){
             break
     }
 }
+
+async function fazerLogin() {
+    const email = document.getElementById("email").value
+    const senha = document.getElementById("senha").value
+
+    try {
+        const login_response = await fetch(`${API_URL}/Auth/login`,{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: email, senha: senha})
+        }
+        )
+        const data = await login_response.json()
+        if (login_response.ok){
+            alert("Login realizado.")
+            localStorage.setItem("tipoUsuario", data.role);
+            localStorage.setItem("dataUsuario", JSON.stringify(data.usuario));
+            history.back()
+        }
+    } catch (error) {
+        alert("Um erro ocorreu: ",error)
+    }
+}
+

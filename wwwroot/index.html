@@ -4,25 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titulo</title>
+    <title>Tela inicial</title>
     <link rel="stylesheet" href="css/site.css">
     <script src="js/script.js" defer></script>
 </head>
 
-<body onclick="">
-    <header>
-        <div class="secret">
-            <a href="html/administrativo/alunos.html">Alunos</a>
-            <a href="html/administrativo/pessoas.html">Pessoas</a>
-            <a href="html/administrativo/turma.html">Turmas</a>
-            <a href="html/administrativo/disciplina.html">Disciplinas</a>
-            <a href="html/administrativo/atividades.html">Atividades</a>
-            <a href="html/administrativo/boletim.html">Boletim</a>
+<body onload="carregarAtividades(); carregarUsuario()">
+    <header id="header">
+        <div class="header-top">
+            <h1>Sistema Acadêmico UniDust</h1>
+            <div class="right" id="login-info">
+            </div>
+        </div>
+        <div id="priv-access">
+            <div id="administrativo" class="nav-group" style="display: none;">
+                <button onclick="window.location.href='/html/administrativo/alunos.html'">Alunos</button>
+                <button onclick="window.location.href='/html/administrativo/pessoas.html'">Pessoas</button>
+                <button onclick="window.location.href='/html/administrativo/turma.html'">Turmas</button>
+                <button onclick="window.location.href='/html/administrativo/disciplina.html'">Disciplinas</button>
+                <button onclick="window.location.href='/html/administrativo/atividades.html'">Atividades</button>
+            </div>
+            <div id="professor" class="nav-group" style="display: none;">
+                <button onclick="window.location.href='/html/administrativo/disciplina.html'">Disciplinas</button>
+                <button onclick="window.location.href='/html/administrativo/atividades.html'">Atividades</button>
+            </div>
         </div>
         <a href="html/conta/login.html">Fazer Login</a>
         <a href="html/conta/registrar.html">Registrar-se</a>
     </header>
     <main>
+        <div class="aluno" id="div-aluno" style="display: none;">
+            <div class="left panel panel--yellow" id="info-aluno">
+                <h1>Informações do aluno</h1>
+                <p>Nome: </p>
+                <p>Turma: </p>
+                <p>Status: </p>
+            </div>
+            <div class="panel panel--teal atividades-wrap">
+                <h1>Atividades</h1>
+                <div id="atividades">
+                </div>
+            </div>
+        </div>
+        <div>
+            <h1>Bem vindo ao Sistema Acadêmico UniDust</h1>
+            <p>Um sistema para gerenciar sua escola com eficiencia.</p>
+        </div>
+    </main>
 
     </main>
 </body>
