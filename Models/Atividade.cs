@@ -1,20 +1,16 @@
-<<<<<<< Updated upstream
-﻿namespace Atividade_API.Models
-=======
-﻿using System.ComponentModel.DataAnnotations.Schema;
+
+using System.ComponentModel.DataAnnotations.Schema;
 using Atividade_API.Models.Usuarios;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Atividade_API.Models
->>>>>>> Stashed changes
+
 {
     public class Atividade
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string nome { get; set; }
         public string descricao { get; set; }
-<<<<<<< Updated upstream
-=======
 
         public int? TurmaID { get; set; }
         public int? ProfessorID { get; set; }
@@ -32,6 +28,6 @@ namespace Atividade_API.Models
         [ForeignKey("DisciplinaID")]
         [ValidateNever]
         public Disciplina? disciplina { get; set; }
->>>>>>> Stashed changes
+
     }
 }

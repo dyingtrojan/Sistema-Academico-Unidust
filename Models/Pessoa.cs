@@ -1,4 +1,6 @@
-﻿namespace Atividade_API.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Atividade_API.Models
 {
     public class Pessoa
     {
