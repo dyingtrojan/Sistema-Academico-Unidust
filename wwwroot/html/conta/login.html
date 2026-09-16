@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../css/site.css">
+    <script src="../../js/api/pessoa.js"></script>
+</head>
+<body>
+    <header>
+        <button onclick="javascript:history.back()">← Voltar</button>
+    </header>
+    <main>
+        <div class="center login">
+            <h1>Crie sua conta:</h1>
+            <div>
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email">
+                <br>
+                <label for="senha">Senha</label>
+                <input type="password" name="senha" id="senha">
+                <br>
+                <button class="cadastrar" onclick="fazerLogin()">Entrar</button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
