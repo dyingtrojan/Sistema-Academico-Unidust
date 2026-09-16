@@ -35,12 +35,41 @@ async function alterarTabela() {
             <td>${aluno.email}</td>
             <td>${aluno.status}</td>
             <td>${aluno.turma.nomeTurma}</td>
-            <th><a>Editar</a></th>
+            <th><button class="edit" onclick="prepararUiEditarAluno()">Editar</button></th>
             <th><a>Detalhes</a></th>
             <th><button class="delete" onclick=deletarAluno(${aluno.id})>Delete</button></th>
         </tr>
         `
     }
+}
+
+async function prepararUiEditarAluno() {
+    const main_ui = document.getElementById("main-ui")
+
+    main_ui.innerHTML = `
+    <h1>Editar Aluno</h1>
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome">
+    <br>
+    <label for="idade">Idade</label>
+    <input type="number" name="idade" id="idade">
+    <br>
+    <label for="cpf">CPF</label>
+    <input type="text" name="cpf" id="cpf">
+    <br>
+    <label for="email">E-mail</label>
+    <input type="email" name="email" id="email">
+    <br>
+    <label for="turma">Turma</label>
+    <select name="turma" id="turma">
+        <option value="null" disabled selected>Selecione a turma</option>
+        <option value="null">Nenhuma turma.</option>
+    </select>
+    <br>
+    <button class="cadastrar" onclick="editarAluno()">Editar</button>
+    <button class="delete" onclick="pararEdicao()">Parar edição</button>`
+
+    main_ui.style.backgroundColor = '#e9f77c'
 }
 
 async function adicionarAluno() {

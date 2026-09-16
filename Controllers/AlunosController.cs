@@ -40,7 +40,7 @@ namespace Atividade_API.Controllers
           {
               return NotFound();
           }
-            var aluno = await _context.Aluno.FindAsync(id);
+            var aluno = await _context.Aluno.Include(a => a.turma).FirstOrDefaultAsync(a => a.Id == id);
 
             if (aluno == null)
             {

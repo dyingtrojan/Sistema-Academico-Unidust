@@ -45,8 +45,9 @@ async function alterarTabela() {
             <td>${atividade.id}</td>
             <td>${atividade.nome}</td>
             <td>${atividade.descricao}</td>
-            <td>${atividade.turma}</td>
-            <td>${atividade.professor}</td>
+            <td>${atividade.turma.nomeTurma}</td>
+            <td>${atividade.professor.nome}</td>
+            <td>${atividade.disciplina.nomeDisciplina}</td>
             <th><a>Editar</a></th>
             <th><a>Detalhes</a></th>
             <th><button class="delete" onclick=deletarAtividade(${atividade.id})>Delete</button></th>
